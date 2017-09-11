@@ -4,6 +4,7 @@
 
     <groupId>ICS425Demo</groupId>
     <artifactId>ICS425DemoApp</artifactId>
+	<description>Demo App for ICS425 at Metro State University.</description>
     <packaging>war</packaging>
     <version>1.0</version>
     <name>ICS425 Demo App</name>
@@ -48,5 +49,4 @@
       </build>
     </profile>
   </profiles>
-	<description>Demo App for ICS425 at Metro State University.</description>
 </project>
