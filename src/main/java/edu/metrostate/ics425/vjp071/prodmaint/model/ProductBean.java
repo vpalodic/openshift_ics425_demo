@@ -15,7 +15,8 @@ import java.time.format.DateTimeFormatter;
  * @author Vincent
  */
 public class ProductBean implements java.io.Serializable, edu.metrostate.ics425.product.Product {
-    private String code;
+	private static final long serialVersionUID = 2954948145204977540L;
+	private String code;
     private String description;
     private double price;
     private LocalDate releaseDate;

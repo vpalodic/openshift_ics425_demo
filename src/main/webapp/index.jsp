@@ -10,11 +10,11 @@
 <%
     String action = (String) request.getParameter("action");
 
-    if (action != null && action.equals("view")) {
+    if (action == null || action.equals("add")) {
 %>
-    <c:import url="/views/productInfo.jsp" />
-<% } else if (action != null && action.equals("add")) { %>
     <c:import url="/views/productEntry.jsp" />
+<% } else if (action.equals("view")) { %>
+    <c:import url="/views/productInfo.jsp" />
 <% } else { %>
     <c:import url="/views/productHome.jsp" />
 <% } %>
