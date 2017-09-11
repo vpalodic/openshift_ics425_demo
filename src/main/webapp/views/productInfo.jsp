@@ -10,17 +10,30 @@
                     <h1>Product Information</h1>
                 </th>
             </tr>
-                <%
-                    String message = (String) request.getAttribute("message");
-                    
-                    if (message != null) {
-                %>
-                <tr>
-                    <td class="info" colspan="2">
-                        <span>${message}</span>
-                    </td>
-                </tr>
-                <% } %>
+            <%@page import="edu.metrostate.ics425.vjp071.prodmaint.model.ProductBean" %>
+            <%
+                String message = (String) request.getAttribute("message");
+            	ProductBean pb = (ProductBean) request.getAttribute("productBean");
+            	
+            	Double price;
+            	String stringPrice = null;
+            	
+            	if (pb != null) {
+            		price = pb.getPrice();
+            		
+            		if (price != null) {
+            			stringPrice = String.format("$%02.2f", price);
+            		}
+            	}                	
+            	
+                if (message != null) {
+            %>
+            <tr>
+                <td class="info" colspan="2">
+                    <span>${message}</span>
+                </td>
+            </tr>
+            <% } %>
             <tr>
                 <td class="alignRight">
                     <label>Product Code:</label>
@@ -42,7 +55,7 @@
                     <label>Price:</label>
                 </td>
                 <td>
-                    <span class="output" name="price">${String.format("$%02.2f", productBean.price)}</span><br />
+                    <span class="output" name="price"><%=stringPrice %></span><br />
                 </td>
             </tr>                    
             <tr>

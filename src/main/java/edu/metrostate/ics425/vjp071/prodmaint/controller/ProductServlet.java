@@ -84,7 +84,6 @@ public class ProductServlet extends HttpServlet {
         
         getServletContext().getRequestDispatcher(url)
                 .forward(request, response);
-        response.setContentType("text/html;charset=UTF-8");
     }
 
     /**
