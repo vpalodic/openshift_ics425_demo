@@ -1,4 +1,4 @@
-openshift-jee-sample
+ICS425 @ Metro State University on OpenShift!
 ====================
 
 A sample app to be deployed on openshift environments
