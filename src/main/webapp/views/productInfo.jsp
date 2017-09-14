@@ -9,9 +9,22 @@
                     <h1>Product Information</h1>
                 </th>
             </tr>
+            <%@page import="edu.metrostate.ics425.vjp071.prodmaint.model.ProductBean" %>
             <%
                 String message = (String) request.getAttribute("message");
-
+            	ProductBean pb = (ProductBean) request.getAttribute("productBean");
+            	
+            	Double price;
+            	String stringPrice = null;
+            	
+            	if (pb != null) {
+            		price = pb.getPrice();
+            		
+            		if (price != null) {
+            			stringPrice = String.format("$%02.2f", price);
+            		}
+            	}
+            	
                 if (message != null) {
             %>
             <tr>
@@ -41,7 +54,7 @@
                     <label for="price">Price:</label>
                 </td>
                 <td>
-                    <span class="output" id="price">${String.format("$%02.2f", productBean.price)}</span><br />
+                    <span class="output" id="price"><%=stringPrice %></span><br />
                 </td>
             </tr>                    
             <tr>
