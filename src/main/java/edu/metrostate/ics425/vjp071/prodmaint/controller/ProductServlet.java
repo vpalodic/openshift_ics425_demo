@@ -39,49 +39,46 @@ public class ProductServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String url = "/index.jsp";
-
+        // 1. Get information from request
         String action = request.getParameter("action");
 
+        StringBuilder message = new StringBuilder();
+        ProductBean productBean = new ProductBean();
+        String url = "/index.jsp";
+
+        // 2. validate data
+        validateParameters(request, response, productBean, message);
+
+        // 3. "do it"
         if (action == null || action.equals("home")) {
             action = "home";
             url += "?action=" + action;
         } else if (action.equals("add")) {
-            StringBuilder message = new StringBuilder();
-            ProductBean productBean = new ProductBean();
-
-            validateParameters(request, response, productBean, message);
-
             if (message.length() == 0) {
                 // We can "add" the record to the database.
                 message.append("New record has been added!<br />");
                 action = "view";
                 url += "?action=" + action;
             }
-
-            request.setAttribute("productBean", productBean);
-            request.setAttribute("message", message.toString());
         } else {
-            // For now we will just follow the "add" logic.
-            StringBuilder message = new StringBuilder();
-            ProductBean productBean = new ProductBean();
-
-            validateParameters(request, response, productBean, message);
-            
-            // Reset the messages as we don't care about any errors.
+            // Reset the messages as we don't care about
+            // any errors at this point.
             message = new StringBuilder();
 
-            if (message.length() == 0) {
-                // We can "load" the record from the database.
-                message.append("Here is the requested record:<br />");
-                action = "view";
-                url += "?action=" + action;
-            }
-
-            request.setAttribute("productBean", productBean);
+            // We can "load" the record from the database into the bean.
+            message.append("Here is the requested record:<br />");
+            action = "view";
+            url += "?action=" + action;
+        }
+        
+        // 4. store information on request
+        request.setAttribute("productBean", productBean);
+        
+        if (message.length() > 0) {
             request.setAttribute("message", message.toString());
         }
         
+        // 5. forward control (in this case to the resource defined in url)
         getServletContext().getRequestDispatcher(url)
                 .forward(request, response);
     }

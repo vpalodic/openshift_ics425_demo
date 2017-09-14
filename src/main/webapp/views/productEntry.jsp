@@ -1,11 +1,10 @@
 <%-- 
-    Document   : index
+    Document   : productEntry
     Created on : Sep 7, 2017, 5:09:34 PM
     Author     : Vincent
 --%>
-
         <form action="product" method="get">
-            <table border="0" width="100%">
+            <table>
                 <tr>
                     <th colspan="2">
                         <h1>Product Entry</h1>
@@ -24,34 +23,34 @@
                 <% } %>
                 <tr>
                     <td class="alignRight">
-                        <label>Product Code:</label>
+                        <label for="code">Product Code:</label>
                     </td>
                     <td>
-                        <input class="input" type="text" name="code" value="${productBean.code}" required/><br />
+                        <input class="input" type="text" id="code" name="code" value="${productBean.code}" required/><br />
                     </td>
                 </tr>                    
                 <tr>
                     <td class="alignRight">
-                        <label>Title:</label>
+                        <label for="description">Title:</label>
                     </td>
                     <td>
-                        <input class="input" type="text" name="description" value="${productBean.description}" required/><br />
+                        <input class="input" type="text" id="description" name="description" value="${productBean.description}" required/><br />
                     </td>
                 </tr>                    
                 <tr>
                     <td class="alignRight">
-                        <label>Price:</label>
+                        <label for="price">Price:</label>
                     </td>
                     <td>
-                        <input class="input" type="text" name="price" value="${productBean.price}" required/><br />
+                        <input class="input" type="text" id="price" name="price" value="${productBean.price}" required/><br />
                     </td>
                 </tr>                    
                 <tr>
                     <td class="alignRight">
-                        <label>Release Date:</label>
+                        <label for="releaseDate">Release Date:</label>
                     </td>
                     <td>
-                        <input class="input" type="text" name="releaseDate" value="${productBean.releaseDate}" required/><br />
+                        <input class="input" type="date" id="releaseDate" name="releaseDate" value="${productBean.releaseDate}" required/><br />
                     </td>
                 </tr>
                 <tr>

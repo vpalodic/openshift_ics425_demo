@@ -21,7 +21,7 @@
         <title>Product Maintenance Demo</title>
     </head>
     <body>
-        <table border="0" width="100%">
+        <table>
             <tr>
                 <td class="alignCenter" colspan="2">
                     <a href="index.jsp?action=add">
@@ -31,6 +31,6 @@
                     <a href="index.jsp?action=home">
                         Home
                     </a>
-                </th>
+                </td>
             </tr>
         </table>

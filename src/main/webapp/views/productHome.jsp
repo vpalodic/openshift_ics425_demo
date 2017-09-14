@@ -4,7 +4,7 @@
     Author     : Vincent
 --%>
 <%@page import="java.time.LocalDate" %>
-        <table border="0" width="100%">
+        <table>
             <tr>
                 <th colspan="2">
                     <h1>Product Maintenance Demo</h1>

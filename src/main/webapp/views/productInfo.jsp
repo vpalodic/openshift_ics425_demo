@@ -1,10 +1,9 @@
 <%-- 
-    Document   : response
+    Document   : productInfo
     Created on : Sep 7, 2017, 10:19:39 PM
     Author     : Vincent
 --%>
-
-        <table border="0" width="100%">
+        <table>
             <tr>
                 <th colspan="2">
                     <h1>Product Information</h1>
