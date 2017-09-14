@@ -9,22 +9,9 @@
                     <h1>Product Information</h1>
                 </th>
             </tr>
-            <%@page import="edu.metrostate.ics425.vjp071.prodmaint.model.ProductBean" %>
             <%
                 String message = (String) request.getAttribute("message");
-            	ProductBean pb = (ProductBean) request.getAttribute("productBean");
-            	
-            	Double price;
-            	String stringPrice = null;
-            	
-            	if (pb != null) {
-            		price = pb.getPrice();
-            		
-            		if (price != null) {
-            			stringPrice = String.format("$%02.2f", price);
-            		}
-            	}                	
-            	
+
                 if (message != null) {
             %>
             <tr>
@@ -35,42 +22,42 @@
             <% } %>
             <tr>
                 <td class="alignRight">
-                    <label>Product Code:</label>
+                    <label for="code">Product Code:</label>
                 </td>
                 <td>
-                    <span class="output" name="code">${productBean.code}</span><br />
+                    <span class="output" id="code">${productBean.code}</span><br />
                 </td>
             </tr>                    
             <tr>
                 <td class="alignRight">
-                    <label>Title:</label>
+                    <label for="description">Title:</label>
                 </td>
                 <td>
-                    <span class="output" name="description">${productBean.description}</span><br />
+                    <span class="output" id="description">${productBean.description}</span><br />
                 </td>
             </tr>                    
             <tr>
                 <td class="alignRight">
-                    <label>Price:</label>
+                    <label for="price">Price:</label>
                 </td>
                 <td>
-                    <span class="output" name="price"><%=stringPrice %></span><br />
+                    <span class="output" id="price">${String.format("$%02.2f", productBean.price)}</span><br />
                 </td>
             </tr>                    
             <tr>
                 <td class="alignRight">
-                    <label>Release Date:</label>
+                    <label for="releaseDate">Release Date:</label>
                 </td>
                 <td>
-                    <span class="output" name="releaseDate">${productBean.releaseDate}</span><br />
+                    <span class="output" id="releaseDate">${productBean.releaseDate}</span><br />
                 </td>
             </tr>
             <tr>
                 <td class="alignRight">
-                    <label>Years in Release:</label>
+                    <label for="yearsReleased">Years in Release:</label>
                 </td>
                 <td>
-                    <span class="output" name="yearsReleased">${productBean.yearsReleased}</span><br />
+                    <span class="output" id="yearsReleased">${productBean.yearsReleased}</span><br />
                 </td>
             </tr>
         </table>
