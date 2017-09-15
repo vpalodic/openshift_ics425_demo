@@ -3,12 +3,8 @@
     Created on : Sep 8, 2017, 11:14:03 AM
     Author     : Vincent
 --%>
-
-<%@ page import="java.time.LocalDate" %>
-<%  
-    LocalDate currentDate = LocalDate.now();
-    int currentYear = currentDate.getYear();
-%>
-<p class="alignCenter">&copy; Copyright <%= currentYear %> Vincent J. Palodichuk</p>
+<%@taglib prefix="func" uri="/WEB-INF/tlds/functions.tld"%>
+<%@taglib prefix="tags" tagdir="/WEB-INF/tags"%>
+        <p class="alignCenter">&copy; Copyright <tags:localDate date="${func:now()}" pattern="yyyy" /> Vincent J. Palodichuk</p>
     </body>
 </html>

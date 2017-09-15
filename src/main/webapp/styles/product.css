@@ -18,7 +18,7 @@ body {
 
 table {
     border: 0px;
-    padding: 5px;
+    padding: 0px;
     width: 100%;
 }
 
@@ -42,19 +42,19 @@ table {
 }
 
 .error {
-    text-align: center;
+    text-align: left;
     font-size: 105%;
-    color: #cc0000;
+    color: #ff0022;
     font-weight: bolder;
-    padding-bottom: 5px;
+    padding-bottom: 0px;
 }
 
 .info {
-    text-align: center;
+    text-align: left;
     font-size: 105%;
     color: #00cc00;
     font-weight: bolder;
-    padding-bottom: 5px;
+    padding-bottom: 0px;
 }
 
 .submit {

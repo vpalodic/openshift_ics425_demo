@@ -4,18 +4,21 @@
     Author     : Vincent
 --%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="utf-8"%>
-<jsp:include page="/includes/header.jsp" />
-<%
-    String action = (String) request.getParameter("action");
-
-    if (action == null || action.equals("add")) {
-%>
-    <c:import url="/views/productEntry.jsp" />
-<% } else if (action.equals("view")) { %>
-    <c:import url="/views/productInfo.jsp" />
-<% } else { %>
-    <c:import url="/views/productHome.jsp" />
-<% } %>
-<jsp:include page="/includes/footer.jsp" />
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:import url="/includes/header.jsp" />
+<c:choose>
+    <c:when test="${param.action == 'add'}">
+        <c:import url="/views/productEntry.jsp" />
+    </c:when>
+    <c:when test="${param.action == 'view'}">
+        <c:import url="/views/productInfo.jsp" />
+    </c:when>
+    <c:when test="${param.action == 'home'}">
+        <c:import url="/views/productHome.jsp" />
+    </c:when>
+    <c:otherwise>
+        <c:import url="/views/productEntry.jsp" />
+    </c:otherwise>
+</c:choose>
+<c:import url="/includes/footer.jsp" />
