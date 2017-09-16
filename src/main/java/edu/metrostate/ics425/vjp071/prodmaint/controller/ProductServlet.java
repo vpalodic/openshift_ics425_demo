@@ -9,6 +9,7 @@ import edu.metrostate.ics425.vjp071.prodmaint.model.ProductBean;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.LinkedList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,19 +17,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ProductServlet
- */
-@WebServlet(name = "Product", description = "Handles product requests", urlPatterns = { "/product" })
-/**
  * The ProductServlet is the controller for handling requests that involve the
  * ProductBean and associated views.
  *
  * @author Vincent
  */
+@WebServlet(name = "Product", urlPatterns = {"/product"})
 public class ProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
-    /**
+
+	/**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
@@ -42,40 +40,37 @@ public class ProductServlet extends HttpServlet {
         // 1. Get information from request
         String action = request.getParameter("action");
 
-        StringBuilder message = new StringBuilder();
+        LinkedList<String> messages = new LinkedList<>();
         ProductBean productBean = new ProductBean();
-        String url = "/index.jsp";
+        String url = "/views/productEntry.jsp"; // Default to the entry form.
 
         // 2. validate data
-        validateParameters(request, response, productBean, message);
+        validateParameters(request, response, productBean, messages);
 
         // 3. "do it"
         if (action == null || action.equals("home")) {
-            action = "home";
-            url += "?action=" + action;
+            url = "/views/productHome.jsp";
         } else if (action.equals("add")) {
-            if (message.length() == 0) {
+            if (messages.isEmpty()) {
                 // We can "add" the record to the database.
-                message.append("New record has been added!<br />");
-                action = "view";
-                url += "?action=" + action;
+                messages.add("New record has been added.");
+                url = "/views/productInfo.jsp";
             }
         } else {
             // Reset the messages as we don't care about
             // any errors at this point.
-            message = new StringBuilder();
-
+            messages.clear();
+                    
             // We can "load" the record from the database into the bean.
-            message.append("Here is the requested record:<br />");
-            action = "view";
-            url += "?action=" + action;
+            messages.add("Here is the requested record:");
+            url = "/views/productInfo.jsp";
         }
         
         // 4. store information on request
         request.setAttribute("productBean", productBean);
         
-        if (message.length() > 0) {
-            request.setAttribute("message", message.toString());
+        if (messages.size() > 0) {
+            request.setAttribute("messages", messages);
         }
         
         // 5. forward control (in this case to the resource defined in url)
@@ -83,6 +78,7 @@ public class ProductServlet extends HttpServlet {
                 .forward(request, response);
     }
 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -90,7 +86,6 @@ public class ProductServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -105,7 +100,6 @@ public class ProductServlet extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -123,55 +117,43 @@ public class ProductServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void validateParameters(HttpServletRequest request, HttpServletResponse response, ProductBean productBean, StringBuilder message) {
+    private void validateParameters(HttpServletRequest request, HttpServletResponse response, ProductBean productBean, LinkedList<String> messages) {
         // get parameters from the request
         String code = request.getParameter("code");
         String description = request.getParameter("description");
         String stringPrice = request.getParameter("price");
-        double price = 0.0;
         String stringReleaseDate = request.getParameter("releaseDate");
-        LocalDate releaseDate = null;
 
         // validate the parameters
         if (code == null || code.trim().isEmpty()) {
-            message.append("Product Code is required and cannot be blank.<br />");
+            messages.add("Product Code is required and cannot be blank.");
         } else {
             productBean.setCode(code.trim());
         }
 
         if (description == null || description.trim().isEmpty()) {
-            message.append("Title is required and cannot be blank.<br />");
+            messages.add("Title is required and cannot be blank.<br />");
         } else {
             productBean.setDescription(description.trim());
         }
 
-        if (stringPrice == null || stringPrice.trim().isEmpty()) {
-            message.append("Price is required and cannot be blank.<br />");
-        } else {
-            try {
-                price = Double.parseDouble(stringPrice.trim());
+        try {
+            double price = Double.parseDouble(stringPrice.trim());
 
-                if (price < 0.00) {
-                    message.append("Price must be greater than or equal to 0.<br />");
-                } else {
-                    productBean.setPrice(price);
-                }
-            } catch (NumberFormatException ex) {
-                message.append("Price must be a valid number.<br />");
-                log("\"Price must be a valid number.", ex);
+            if (price < 0.00) {
+                messages.add("Price must be greater than or equal to 0.");
+            } else {
+                productBean.setPrice(price);
             }
+        } catch (NumberFormatException | NullPointerException ex) {
+            messages.add("Price is missing or is not a valid number.");
         }
 
-        if (stringReleaseDate == null || stringReleaseDate.trim().isEmpty()) {
-            message.append("Release Date is required and cannot be blank.<br />");
-        } else {
-            try {
-                releaseDate = LocalDate.parse(stringReleaseDate.trim());
-                productBean.setReleaseDate(releaseDate);
-            } catch (DateTimeParseException ex) {
-                message.append("Release Date must be a valid date in this format: YYYY-MM-DD.<br />");
-                log("Release Date must be a valid date in this format: YYYY-MM-DD.", ex);
-            }
+        try {
+            LocalDate releaseDate = LocalDate.parse(stringReleaseDate.trim());
+            productBean.setReleaseDate(releaseDate);
+        } catch (DateTimeParseException | NullPointerException ex) {
+            messages.add("Release Date is missing or is not a valid date.");
         }
     }
 }

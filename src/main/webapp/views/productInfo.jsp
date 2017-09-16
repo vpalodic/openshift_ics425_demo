@@ -3,10 +3,12 @@
     Created on : Sep 7, 2017, 10:19:39 PM
     Author     : Vincent
 --%>
+<%@page contentType="text/html" pageEncoding="utf-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="tags" tagdir="/WEB-INF/tags"%>
 
+<c:import url="/includes/header.jsp" />
 <table>
     <tr>
         <th colspan="2">
@@ -77,3 +79,4 @@
         </td>
     </tr>
 </table>
+<c:import url="/includes/footer.jsp" />

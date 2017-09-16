@@ -3,7 +3,10 @@
     Created on : Sep 7, 2017, 5:09:34 PM
     Author     : Vincent
 --%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+
+<c:import url="/includes/header.jsp" />
 <form action="product" method="get">
     <table>
         <tr>
@@ -64,5 +67,4 @@
         </tr>
     </table>
 </form>
-</body>
-</html>
+<c:import url="/includes/footer.jsp" />

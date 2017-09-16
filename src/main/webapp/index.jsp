@@ -9,16 +9,16 @@
 <c:import url="/includes/header.jsp" />
 <c:choose>
     <c:when test="${param.action == 'add'}">
-        <c:import url="/views/productEntry.jsp" />
+        <c:redirect url="/views/productEntry.jsp" />
     </c:when>
     <c:when test="${param.action == 'view'}">
-        <c:import url="/views/productInfo.jsp" />
+        <c:redirect url="/views/productInfo.jsp" />
     </c:when>
     <c:when test="${param.action == 'home'}">
-        <c:import url="/views/productHome.jsp" />
+        <c:redirect url="/views/productHome.jsp" />
     </c:when>
     <c:otherwise>
-        <c:import url="/views/productEntry.jsp" />
+        <c:redirect url="/views/productEntry.jsp" />
     </c:otherwise>
 </c:choose>
 <c:import url="/includes/footer.jsp" />
