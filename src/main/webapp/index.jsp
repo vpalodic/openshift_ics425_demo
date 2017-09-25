@@ -1,23 +1,29 @@
-<%-- 
-    Document   : index
-    Created on : Sep 8, 2017, 2:43:19 AM
-    Author     : Vincent
---%>
-<%@page contentType="text/html" pageEncoding="utf-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
+<%@taglib prefix="func" uri="/WEB-INF/tlds/functions.tld"%>
+
 <c:import url="/includes/header.jsp" />
-<c:choose>
-    <c:when test="${param.action == 'add'}">
-        <c:redirect url="/views/productEntry.jsp" />
-    </c:when>
-    <c:when test="${param.action == 'view'}">
-        <c:redirect url="/views/productInfo.jsp" />
-    </c:when>
-    <c:when test="${param.action == 'home'}">
-        <c:redirect url="/views/productHome.jsp" />
-    </c:when>
-    <c:otherwise>
-        <c:redirect url="/views/productEntry.jsp" />
-    </c:otherwise>
-</c:choose>
+<table>
+    <tr>
+        <th colspan="2">
+            <h1>Product Maintenance</h1>
+        </th>
+    </tr>
+    <tr>
+        <td>
+            <ul>
+                <li>
+                    <a href="catalog">
+                        Product Catalog
+                    </a>
+                </li>
+                <li>
+                    <a href="catalog/add">
+                        Add New Product
+                    </a>
+                </li>
+            </ul>
+        </td>
+    </tr>
+</table>
 <c:import url="/includes/footer.jsp" />

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <description>For this project, you’ll create a series of pages that allow you to add, update, or delete a product that’s available to the application.  This will be done in two phases. In this phase, the Edit and Delete functions will only be partially implemented.
+Note: There is a revision to the Product interface. Modify your ProductBean appropriately.</description>
+    <display-name>ICS 425 Programming Assignment 3: Product Maintenance</display-name>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>

@@ -7,11 +7,11 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> 
 
 <c:import url="/includes/header.jsp" />
-<form action="product" method="get">
+<form action="product/add" method="post">
     <table>
         <tr>
             <th colspan="2">
-                <h1>Product Entry</h1>
+                <h1>Add Product Form</h1>
             </th>
         </tr>
         <c:if test="${!empty messages}">
@@ -32,7 +32,7 @@
                 <label for="code">Product Code:</label>
             </td>
             <td>
-                <input class="input" type="text" id="code" name="code" value="${productBean.code}" required/><br />
+                <input class="input" type="text" id="code" name="code" value="${param.code}" required/>
             </td>
         </tr>                    
         <tr>
@@ -40,7 +40,7 @@
                 <label for="description">Title:</label>
             </td>
             <td>
-                <input class="input" type="text" id="description" name="description" value="${productBean.description}" required/><br />
+                <input class="input" type="text" id="description" name="description" value="${param.description}" required/>
             </td>
         </tr>                    
         <tr>
@@ -48,7 +48,7 @@
                 <label for="price">Price:</label>
             </td>
             <td>
-                <input class="input" type="text" id="price" name="price" value="${productBean.price}" required/><br />
+                <input class="input" type="text" id="price" name="price" value="${param.price}" required/>
             </td>
         </tr>                    
         <tr>
@@ -56,13 +56,14 @@
                 <label for="releaseDate">Release Date:</label>
             </td>
             <td>
-                <input class="input" type="date" id="releaseDate" name="releaseDate" value="${productBean.releaseDate}" required/><br />
+                <input class="input" type="date" id="releaseDate" name="releaseDate" value="${param.releaseDate}"/>
             </td>
         </tr>
         <tr>
             <td class="alignRight" colspan="2">
                 <input class="submit" type="submit" value="Submit" />
-                <input hidden="true" type="hidden" name="action" value="add" />
+                <span class="submit"><a href="catalog">Cancel</a></span>
+                <input class="submit" type="reset" value="Reset" />
             </td>
         </tr>
     </table>
